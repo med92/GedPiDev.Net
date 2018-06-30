@@ -14,6 +14,7 @@ namespace GedPiDev.Domain.Entities
         public string destinataire { get; set; }
         public string detail { get; set; }
         public Boolean typeCourrier { get; set; }
-        public Traceability traceability { get; set; }
+        public virtual Traceability traceability { get; set; }
+        public Correspondent correspondent { get; set; }
     }
 }

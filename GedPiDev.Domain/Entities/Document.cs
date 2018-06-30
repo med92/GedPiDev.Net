@@ -12,7 +12,7 @@ namespace GedPiDev.Domain.Entities
         public String docName { get; set; }
         public DocState status { get; set; }
         public Attachement attachement { get; set; }
-        public Workflow docWorkFlow { get; set; }
+        public virtual Workflow docWorkFlow { get; set; }
         public Traceability traceability { get; set; }
     }
 }

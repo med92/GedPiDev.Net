@@ -13,6 +13,6 @@ namespace GedPiDev.Domain.Entities
         public int numTel { get; set; }
         public string departmentEmail { get; set; }
         public Traceability traceability { get; set; }
-        public Correspondent correspondent { get; set; }
+        public virtual ICollection<ApplicationUser> Employee { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace GedPiDev.Domain.Entities
 {
@@ -10,7 +11,8 @@ namespace GedPiDev.Domain.Entities
     public class ApplicationUser : IdentityUser
     {
 
-        public Department userDepartment { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
+        public virtual Department department { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

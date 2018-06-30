@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GedPiDev.Domain.Entities
 {
@@ -13,5 +11,7 @@ namespace GedPiDev.Domain.Entities
         public string nextStep { get; set; }
         public string previousStep { get; set; }
         public ICollection<string> steps { get; set; }
+        [ForeignKey("Student")]
+        public int DocumentId { get; set; }
     }
 }
