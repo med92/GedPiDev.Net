@@ -26,6 +26,11 @@ namespace GedPiDev.RestAPI.Controllers
             return corrService.GetAllAsync();
         }
 
+        // GET: api/greetings
+        public string greetings()
+        {
+            return "greeting";
+        }
         // GET: api/Correspondents/5
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> GetCorrespondent(int id)
