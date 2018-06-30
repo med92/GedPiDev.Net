@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Data", "GedPiDev.Data\GedPiDev.Data.csproj", "{291A894F-2223-49C4-8119-4914502BD337}"
 EndProject
@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Domain", "GedPiDev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Service", "GedPiDev.Service\GedPiDev.Service.csproj", "{90FEF05C-FA97-4897-9F4B-02490B158D07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Web", "GedPiDev.Web\GedPiDev.Web.csproj", "{035611AA-912D-4324-B720-596C32BC58AD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.console", "GedPiDev.console\GedPiDev.console.csproj", "{9E172E33-889F-400C-8949-FF82EA1B12F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Web", "GedPiDev\GedPiDev.Web.csproj", "{3EAEB3A1-5B5F-4693-86E6-BC61EA54E5FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.pattern", "GedPiDev.pattern\GedPiDev.pattern.csproj", "{1E58D95B-808F-47CD-AE51-FA3F101E2EEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +33,18 @@ Global
 		{90FEF05C-FA97-4897-9F4B-02490B158D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FEF05C-FA97-4897-9F4B-02490B158D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FEF05C-FA97-4897-9F4B-02490B158D07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{035611AA-912D-4324-B720-596C32BC58AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{035611AA-912D-4324-B720-596C32BC58AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{035611AA-912D-4324-B720-596C32BC58AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{035611AA-912D-4324-B720-596C32BC58AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAEB3A1-5B5F-4693-86E6-BC61EA54E5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAEB3A1-5B5F-4693-86E6-BC61EA54E5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAEB3A1-5B5F-4693-86E6-BC61EA54E5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAEB3A1-5B5F-4693-86E6-BC61EA54E5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E58D95B-808F-47CD-AE51-FA3F101E2EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E58D95B-808F-47CD-AE51-FA3F101E2EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E58D95B-808F-47CD-AE51-FA3F101E2EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E58D95B-808F-47CD-AE51-FA3F101E2EEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
