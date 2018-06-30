@@ -10,7 +10,7 @@ namespace GedPiDev.Domain.Entities
     public class ApplicationUser : IdentityUser
     {
 
-
+        public Department userDepartment { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GedPiDev.Data
+namespace GedPiDev.Domain.Entities
 {
-    public class Class1
+   public enum DocState
     {
+        New,WAITINGFORAPPROVAL,APPROVED
     }
 }
