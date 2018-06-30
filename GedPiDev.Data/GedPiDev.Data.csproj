@@ -101,7 +101,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="GedPiDevContext.cs" />
     <Compile Include="Migrations\201806300252192_firstMigration.cs" />
     <Compile Include="Migrations\201806300252192_firstMigration.Designer.cs">

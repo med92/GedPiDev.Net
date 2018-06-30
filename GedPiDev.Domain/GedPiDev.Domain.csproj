@@ -86,8 +86,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\Attachement.cs" />
+    <Compile Include="Entities\Correspondent.cs" />
     <Compile Include="Entities\Courrier.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\DocState.cs" />
+    <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\IdentityModels.cs" />
+    <Compile Include="Entities\Traceability.cs" />
+    <Compile Include="Entities\Workflow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
