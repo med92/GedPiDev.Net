@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90FEF05C-FA97-4897-9F4B-02490B158D07}</ProjectGuid>
+    <ProjectGuid>{AE5E8FEF-1017-454F-82D2-DBEE32DC3DF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GedPiDev.Service</RootNamespace>
-    <AssemblyName>GedPiDev.Service</AssemblyName>
+    <RootNamespace>ClassLibrary1</RootNamespace>
+    <AssemblyName>ClassLibrary1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,21 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\GedPiDev.Service.Pattern.csproj">
-      <Project>{ae5e8fef-1017-454f-82d2-dbee32dc3df2}</Project>
-      <Name>GedPiDev.Service.Pattern</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GedPiDev.Data\GedPiDev.Data.csproj">
       <Project>{291a894f-2223-49c4-8119-4914502bd337}</Project>
       <Name>GedPiDev.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GedPiDev.Domain\GedPiDev.Domain.csproj">
-      <Project>{cbb21a70-2f15-40cc-ba63-233bf2435b7a}</Project>
-      <Name>GedPiDev.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
