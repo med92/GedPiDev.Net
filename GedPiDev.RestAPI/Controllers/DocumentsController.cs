@@ -21,7 +21,7 @@ namespace GedPiDev.RestAPI.Controllers
         private IDocumentService docService = new DocumentService();
 
         // GET: api/Documents
-        public IQueryable<Document> GetDocuments()
+        public Task<List<Document>> GetDocuments()
         {
             return docService.GetAllAsync(); 
         }

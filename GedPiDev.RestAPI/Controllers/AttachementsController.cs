@@ -94,7 +94,7 @@ namespace GedPiDev.RestAPI.Controllers
         {
             if (disposing)
             {
-                attachmentService.Dispose()
+                attachmentService.Dispose();
             }
             base.Dispose(disposing);
         }
