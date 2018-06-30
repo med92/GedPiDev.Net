@@ -35,5 +35,11 @@ namespace GedPiDev.RestAPI.Models
         public System.Data.Entity.DbSet<GedPiDev.Domain.Entities.Courrier> Courriers { get; set; }
 
         public System.Data.Entity.DbSet<GedPiDev.Domain.Entities.Correspondent> Correspondents { get; set; }
+
+        public System.Data.Entity.DbSet<GedPiDev.Domain.Entities.Document> Documents { get; set; }
+
+        public System.Data.Entity.DbSet<GedPiDev.Domain.Entities.Attachement> Attachements { get; set; }
+
+        public System.Data.Entity.DbSet<GedPiDev.Domain.Entities.Workflow> Workflows { get; set; }
     }
 }

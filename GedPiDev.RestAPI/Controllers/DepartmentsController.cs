@@ -19,8 +19,6 @@ namespace GedPiDev.RestAPI.Controllers
     {
         private IDepartmentService depService = new DepartmentService(); 
 
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: api/Departments
         public Task<List<Department>> GetDepartments()
         {

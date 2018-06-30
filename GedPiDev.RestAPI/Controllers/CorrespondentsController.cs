@@ -11,24 +11,26 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GedPiDev.Domain.Entities;
 using GedPiDev.RestAPI.Models;
+using GedPiDev.Service.Interfaces;
+using GedPiDev.Service.Implementation;
 
 namespace GedPiDev.RestAPI.Controllers
 {
     public class CorrespondentsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ICorrespondantService corrService = new CorrespondentService();
 
         // GET: api/Correspondents
-        public IQueryable<Correspondent> GetCorrespondents()
+        public Task<List<Correspondent>> GetCorrespondents()
         {
-            return db.Correspondents;
+            return corrService.GetAllAsync();
         }
 
         // GET: api/Correspondents/5
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> GetCorrespondent(int id)
         {
-            Correspondent correspondent = await db.Correspondents.FindAsync(id);
+            Correspondent correspondent = corrService.GetById(id);
             if (correspondent == null)
             {
                 return NotFound();
@@ -51,23 +53,8 @@ namespace GedPiDev.RestAPI.Controllers
                 return BadRequest();
             }
 
-            db.Entry(correspondent).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CorrespondentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            corrService.Update(correspondent);
+            corrService.CommitAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -81,8 +68,8 @@ namespace GedPiDev.RestAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Correspondents.Add(correspondent);
-            await db.SaveChangesAsync();
+            corrService.Add(correspondent);
+            corrService.CommitAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = correspondent.Id }, correspondent);
         }
@@ -91,14 +78,13 @@ namespace GedPiDev.RestAPI.Controllers
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> DeleteCorrespondent(int id)
         {
-            Correspondent correspondent = await db.Correspondents.FindAsync(id);
+            Correspondent correspondent = corrService.GetById(id);
             if (correspondent == null)
             {
                 return NotFound();
             }
 
-            db.Correspondents.Remove(correspondent);
-            await db.SaveChangesAsync();
+            corrService.Delete(correspondent); 
 
             return Ok(correspondent);
         }
@@ -107,14 +93,14 @@ namespace GedPiDev.RestAPI.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                corrService.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool CorrespondentExists(int id)
         {
-            return db.Correspondents.Count(e => e.Id == id) > 0;
+            return (corrService.GetById(id) != null);
         }
     }
 }

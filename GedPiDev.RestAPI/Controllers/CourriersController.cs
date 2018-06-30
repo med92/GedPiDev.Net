@@ -8,166 +8,100 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.OData;
-using System.Web.Http.OData.Routing;
+using System.Web.Http.Description;
 using GedPiDev.Domain.Entities;
 using GedPiDev.RestAPI.Models;
+using GedPiDev.Service.Interfaces;
+using GedPiDev.Service.Implementation;
 
 namespace GedPiDev.RestAPI.Controllers
 {
-    /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
-
-    using System.Web.Http.OData.Builder;
-    using System.Web.Http.OData.Extensions;
-    using GedPiDev.Domain.Entities;
-    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Courrier>("Courriers");
-    builder.EntitySet<Traceability>("Traceabilities"); 
-    config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-    */
-    public class CourriersController : ODataController
+    public class CourriersController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ICourrierService courrierService = new CourrierService();
 
-        // GET: odata/Courriers
-        [EnableQuery]
-        public IQueryable<Courrier> GetCourriers()
+        // GET: api/Courriers1
+        public Task<List<Courrier>> GetCourriers()
         {
-            return db.Courriers;
+            return courrierService.GetAllAsync();
         }
 
-        // GET: odata/Courriers(5)
-        [EnableQuery]
-        public SingleResult<Courrier> GetCourrier([FromODataUri] int key)
+        // GET: api/Courriers1/5
+        [ResponseType(typeof(Courrier))]
+        public async Task<IHttpActionResult> GetCourrier(int id)
         {
-            return SingleResult.Create(db.Courriers.Where(courrier => courrier.Id == key));
-        }
-
-        // PUT: odata/Courriers(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Courrier> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Courrier courrier = await db.Courriers.FindAsync(key);
+            Courrier courrier = courrierService.GetById(id); 
             if (courrier == null)
             {
                 return NotFound();
             }
 
-            patch.Put(courrier);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourrierExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(courrier);
+            return Ok(courrier);
         }
 
-        // POST: odata/Courriers
-        public async Task<IHttpActionResult> Post(Courrier courrier)
+        // PUT: api/Courriers1/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutCourrier(int id, Courrier courrier)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Courriers.Add(courrier);
-            await db.SaveChangesAsync();
-
-            return Created(courrier);
-        }
-
-        // PATCH: odata/Courriers(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Courrier> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
+            if (id != courrier.Id)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
 
-            Courrier courrier = await db.Courriers.FindAsync(key);
-            if (courrier == null)
-            {
-                return NotFound();
-            }
-
-            patch.Patch(courrier);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourrierExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(courrier);
-        }
-
-        // DELETE: odata/Courriers(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
-        {
-            Courrier courrier = await db.Courriers.FindAsync(key);
-            if (courrier == null)
-            {
-                return NotFound();
-            }
-
-            db.Courriers.Remove(courrier);
-            await db.SaveChangesAsync();
+            courrierService.Update(courrier);
+            courrierService.CommitAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Courriers(5)/traceability
-        [EnableQuery]
-        public SingleResult<Traceability> Gettraceability([FromODataUri] int key)
+        // POST: api/Courriers1
+        [ResponseType(typeof(Courrier))]
+        public async Task<IHttpActionResult> PostCourrier(Courrier courrier)
         {
-            return SingleResult.Create(db.Courriers.Where(m => m.Id == key).Select(m => m.traceability));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            courrierService.Add(courrier);
+            courrierService.CommitAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = courrier.Id }, courrier);
+        }
+
+        // DELETE: api/Courriers1/5
+        [ResponseType(typeof(Courrier))]
+        public async Task<IHttpActionResult> DeleteCourrier(int id)
+        {
+            Courrier courrier = courrierService.GetById(id);
+            if (courrier == null)
+            {
+                return NotFound();
+            }
+
+            courrierService.Delete(courrier);
+            courrierService.CommitAsync();
+
+            return Ok(courrier);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                courrierService.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool CourrierExists(int key)
+        private bool CourrierExists(int id)
         {
-            return db.Courriers.Count(e => e.Id == key) > 0;
-        }
+            return (courrierService.GetById(id) != null);
+;        }
     }
 }
