@@ -85,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Attachement.cs" />
     <Compile Include="Entities\Correspondent.cs" />
     <Compile Include="Entities\Courrier.cs" />
