@@ -18,6 +18,7 @@ namespace GedPiDev.Data
         }
 
         public DbSet<Courrier> courriers { get; set; }
+        public DbSet<Department> departements { get; set; }
     }
 
 
