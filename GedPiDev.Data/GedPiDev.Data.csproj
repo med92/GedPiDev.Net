@@ -103,6 +103,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="GedPiDevContext.cs" />
+    <Compile Include="Migrations\201806300252192_firstMigration.cs" />
+    <Compile Include="Migrations\201806300252192_firstMigration.Designer.cs">
+      <DependentUpon>201806300252192_firstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,8 +117,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806300252192_firstMigration.resx">
+      <DependentUpon>201806300252192_firstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

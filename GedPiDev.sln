@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Service", "GedPiDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.Web", "GedPiDev.Web\GedPiDev.Web.csproj", "{035611AA-912D-4324-B720-596C32BC58AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GedPiDev.console", "GedPiDev.console\GedPiDev.console.csproj", "{9E172E33-889F-400C-8949-FF82EA1B12F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{035611AA-912D-4324-B720-596C32BC58AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035611AA-912D-4324-B720-596C32BC58AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035611AA-912D-4324-B720-596C32BC58AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E172E33-889F-400C-8949-FF82EA1B12F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
