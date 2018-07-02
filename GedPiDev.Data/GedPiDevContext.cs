@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using MySql.Data.Entity;
 using GedPiDev.Domain.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
+using GedPiDev.Domain;
 
 namespace GedPiDev.Data
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-  public   class GedPiDevContext : DbContext
+  public   class GedPiDevContext : IdentityDbContext<ApplicationUser>, IDbContext
     {
-        public GedPiDevContext() : base("Name=MyContext")
+        public GedPiDevContext() : 
+            base("Name=MyContext")
         {
-            Database.SetInitializer<GedPiDevContext>(new GedPiDevContextInitializer());
         }
 
         public DbSet<Courrier> courriers { get; set; }
@@ -26,7 +28,7 @@ namespace GedPiDev.Data
     {
         protected override void Seed(GedPiDevContext context)
         {
-            var listCategories = new Courrier() { objet = "email" }; 
+            var listCategories = new Courrier() { ObjetCourrier = "email" }; 
           
 
             context.courriers.Add(listCategories);

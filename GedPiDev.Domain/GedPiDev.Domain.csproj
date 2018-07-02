@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Adresse.cs" />
     <Compile Include="Entities\Attachement.cs" />
     <Compile Include="Entities\Correspondent.cs" />
     <Compile Include="Entities\Courrier.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Entities\IdentityModels.cs" />
     <Compile Include="Entities\Traceability.cs" />
     <Compile Include="Entities\Workflow.cs" />
+    <Compile Include="IDbContext.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

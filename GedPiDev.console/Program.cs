@@ -12,14 +12,7 @@ namespace GedPiDev.console
     {
         static void Main(string[] args)
         {
-            using (var ctx = new GedPiDevContext())
-            {
-
-                Courrier A = new Courrier() { objet = "second email" };
-
-                ctx.courriers.Add(A);
-                ctx.SaveChanges();
-            }
+            
 
 
 
