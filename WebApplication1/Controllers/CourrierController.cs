@@ -13,14 +13,14 @@ namespace WebApplication1.Controllers
     {
         private ICourrierService courrierService = new CourrierService();
 
-        // GET: api/Attachements
+        // GET: api/Courriers
         public Task<List<Courrier>> GetCourrier()
         {
             return courrierService.GetAllAsync();
         }
 
-        // GET: api/Attachements/5
-        [ResponseType(typeof(Attachement))]
+        // GET: api/Courriers/5
+        [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> GetCourrier(string id)
         {
             Courrier courrier = courrierService.GetById(id);
@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
             return Ok(courrier);
         }
 
-        // PUT: api/Attachements/5
+        // PUT: api/Courriers/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutCourrier(string id, Courrier Courrier)
         {
@@ -52,8 +52,8 @@ namespace WebApplication1.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Attachements
-        [ResponseType(typeof(Attachement))]
+        // POST: api/Courriers
+        [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> PostCourrier(Courrier Courrier)
         {
             if (!ModelState.IsValid)
@@ -67,8 +67,8 @@ namespace WebApplication1.Controllers
             return CreatedAtRoute("DefaultApi", new { id = Courrier.CourrierId }, Courrier);
         }
 
-        // DELETE: api/Attachements/5
-        [ResponseType(typeof(Attachement))]
+        // DELETE: api/Courriers/5
+        [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> DeleteCourrier(string id)
         {
             Courrier Courrier = courrierService.GetById(id);
