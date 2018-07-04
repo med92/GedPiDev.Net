@@ -12,7 +12,6 @@ namespace GedPiDev.Data.Infrastructure
         IRepositoryBaseAsync<T> getRepository<T>() where T : class;
         void CommitAsync();
         void Commit();
-
     }
 
 }

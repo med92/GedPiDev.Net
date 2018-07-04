@@ -60,6 +60,8 @@ namespace GedPiDev.Data.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
                         DepartmentId = c.Int(),
+                        FirstName = c.String(unicode: false),
+                        LastName = c.String(unicode: false),
                         Email = c.String(maxLength: 80, storeType: "nvarchar"),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(unicode: false),
