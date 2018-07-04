@@ -25,10 +25,8 @@ namespace GedPiDev.Service.Pattern
         Task<T> FindAsync(Expression<Func<T, bool>> match);
 
         Task<List<T>> FindAllAsync(Expression<Func<T, bool>> match);
-
         void Commit();
         void CommitAsync();
-
     }
 
 }

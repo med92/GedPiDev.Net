@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -32,11 +34,14 @@ namespace GedPiDev.Data.Infrastructure
         }
         public virtual void Update(T entity)
         {
+            dataContext.Database.Initialize(force: false);
             dbset.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
         }
+
         public virtual void Delete(T entity)
         {
+            dataContext.Database.Initialize(force: false);
             dbset.Remove(entity);
         }
         public virtual void Delete(Expression<Func<T, bool>> where)
@@ -53,10 +58,6 @@ namespace GedPiDev.Data.Infrastructure
         {
             return dbset.Find(id);
         }
-        //public virtual IEnumerable<T> GetAll()
-        //{
-        //    return dbset.ToList();
-        //}
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where = null, Expression<Func<T, bool>> orderBy = null)
         {
@@ -93,7 +94,7 @@ namespace GedPiDev.Data.Infrastructure
 
         public async Task<T> FindAsync(Expression<Func<T, bool>> match)
         {
-            return await dbset.SingleOrDefaultAsync(match);
+            return await dbset.AsNoTracking().SingleOrDefaultAsync(match);
         }
 
         public async Task<List<T>> FindAllAsync(Expression<Func<T, bool>> match)

@@ -22,5 +22,6 @@ namespace GedPiDev.Data.Infrastructure
         void Update(T entity);
 
 
+
     }
 }

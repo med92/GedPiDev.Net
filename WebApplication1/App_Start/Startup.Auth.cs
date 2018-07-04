@@ -30,6 +30,11 @@ namespace WebApplication1
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/AccountManagerMVC/Login")
+            });
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),

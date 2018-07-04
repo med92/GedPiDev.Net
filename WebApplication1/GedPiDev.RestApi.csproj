@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebApplication1</RootNamespace>
     <AssemblyName>WebApplication1</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -56,17 +56,31 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.10.7\lib\net452\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.10.7\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -214,6 +228,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountManagerMVCController.cs" />
     <Compile Include="Controllers\AdresseController.cs" />
     <Compile Include="Controllers\AttachementsController.cs" />
     <Compile Include="Controllers\CorrespondentsController.cs" />
@@ -228,6 +243,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountManagerMVCViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -290,6 +306,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Delete.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Edit.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Index.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Login.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Manage.cshtml" />
+    <Content Include="Views\AccountManagerMVC\Register.cshtml" />
+    <Content Include="Views\AccountManagerMVC\UserRoles.cshtml" />
+    <Content Include="Views\AccountManagerMVC\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\AccountManagerMVC\_SetPasswordPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -306,6 +333,10 @@
     <ProjectReference Include="..\ClassLibrary1\GedPiDev.Service.Pattern.csproj">
       <Project>{ae5e8fef-1017-454f-82d2-dbee32dc3df2}</Project>
       <Name>GedPiDev.Service.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GedPiDev.Data\GedPiDev.Data.csproj">
+      <Project>{291a894f-2223-49c4-8119-4914502bd337}</Project>
+      <Name>GedPiDev.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\GedPiDev.Domain\GedPiDev.Domain.csproj">
       <Project>{cbb21a70-2f15-40cc-ba63-233bf2435b7a}</Project>

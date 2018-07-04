@@ -13,7 +13,8 @@ namespace GedPiDev.Domain.Entities
 
         public Nullable<int> DepartmentId { get; set; }
         public virtual Department department { get; set; }
-
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -23,4 +24,5 @@ namespace GedPiDev.Domain.Entities
             return userIdentity;
         }
     }
-}
+
+  }
