@@ -28,5 +28,6 @@ namespace GedPiDev.Domain.Entities
         public virtual string CreationUser { get; set; }
         public string UdateUser { get; set; }
         public string UpdateDate { get; set; }
+        public string DocumentCore { get; set; }
     }
 }
