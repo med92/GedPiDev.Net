@@ -9,16 +9,18 @@ using System.Web.Http.Description;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class CourrierController : ApiController
     {
         private ICourrierService courrierService = new CourrierService();
 
         // GET: api/Courriers
+        [Authorize(Roles = "user")]
         public Task<List<Courrier>> GetCourrier()
         {
             return courrierService.GetAllAsync();
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Courriers/5
         [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> GetCourrier(string id)
@@ -31,7 +33,7 @@ namespace WebApplication1.Controllers
 
             return Ok(courrier);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // PUT: api/Courriers/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutCourrier(string id, Courrier Courrier)
@@ -51,7 +53,7 @@ namespace WebApplication1.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Courriers
         [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> PostCourrier(Courrier Courrier)
@@ -66,7 +68,7 @@ namespace WebApplication1.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = Courrier.CourrierId }, Courrier);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Courriers/5
         [ResponseType(typeof(Courrier))]
         public async Task<IHttpActionResult> DeleteCourrier(string id)

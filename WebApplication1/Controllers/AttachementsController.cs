@@ -15,16 +15,18 @@ using GedPiDev.Service.Implementation;
 
 namespace GedPiDev.RestAPI.Controllers
 {
+    [Authorize]
     public class AttachementsController : ApiController
     {
         private IAttachementService attachmentService = new AttachmentService();
 
+        [Authorize(Roles = "user")]
         // GET: api/Attachements
         public Task<List<Attachement>> GetAttachements()
         {
             return attachmentService.GetAllAsync();
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Attachements/5
         [ResponseType(typeof(Attachement))]
         public async Task<IHttpActionResult> GetAttachement(string id)
@@ -37,7 +39,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return Ok(attachement);
         }
-
+        [Authorize(Roles = "canEdit,CanAdd")]
         // PUT: api/Attachements/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutAttachement(string id, Attachement attachement)
@@ -57,7 +59,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Attachements
         [ResponseType(typeof(Attachement))]
         public async Task<IHttpActionResult> PostAttachement(Attachement attachement)
@@ -72,7 +74,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = attachement.AttachementId }, attachement);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Attachements/5
         [ResponseType(typeof(Attachement))]
         public async Task<IHttpActionResult> DeleteAttachement(string id)

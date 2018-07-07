@@ -15,16 +15,17 @@ using GedPiDev.Service.Implementation;
 
 namespace GedPiDev.RestAPI.Controllers
 {
+    [Authorize]
     public class CorrespondentsController : ApiController
     {
         private ICorrespondantService corrService = new CorrespondentService();
-
+        [Authorize(Roles = "user")]
         // GET: api/Correspondents
         public Task<List<Correspondent>> GetCorrespondents()
         {
             return corrService.GetAllAsync();
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Correspondents/5
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> GetCorrespondent(string id)
@@ -37,7 +38,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return Ok(correspondent);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // PUT: api/Correspondents/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutCorrespondent(string id, Correspondent correspondent)
@@ -57,7 +58,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Correspondents
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> PostCorrespondent(Correspondent correspondent)
@@ -72,7 +73,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = correspondent.CorrespondentId }, correspondent);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Correspondents/5
         [ResponseType(typeof(Correspondent))]
         public async Task<IHttpActionResult> DeleteCorrespondent(string id)

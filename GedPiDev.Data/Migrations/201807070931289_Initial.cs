@@ -3,7 +3,7 @@ namespace GedPiDev.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -18,6 +18,7 @@ namespace GedPiDev.Data.Migrations
                         ObjetCourrier = c.String(unicode: false),
                         Detail = c.String(unicode: false),
                         CorrespondentId = c.String(maxLength: 80, storeType: "nvarchar"),
+                        sender = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.CourrierId)
                 .ForeignKey("dbo.Correspondents", t => t.CorrespondentId)
@@ -45,14 +46,44 @@ namespace GedPiDev.Data.Migrations
                         Etat = c.Boolean(nullable: false),
                         CurrentStat = c.Int(nullable: false),
                         DateCreation = c.String(unicode: false),
-                        ApplicationUserId = c.String(maxLength: 80, storeType: "nvarchar"),
                         WorkflowId = c.String(unicode: false),
+                        CreationUser = c.String(unicode: false),
+                        UdateUser = c.String(unicode: false),
+                        UpdateDate = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.DocumentId)
                 .ForeignKey("dbo.Attachements", t => t.DocumentId)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
-                .Index(t => t.DocumentId)
-                .Index(t => t.ApplicationUserId);
+                .Index(t => t.DocumentId);
+            
+            CreateTable(
+                "dbo.Correspondents",
+                c => new
+                    {
+                        CorrespondentId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
+                        NomCorrespondant = c.String(unicode: false),
+                        Telephone = c.Int(nullable: false),
+                        Email = c.String(unicode: false),
+                        Fax = c.Int(nullable: false),
+                        userId = c.String(unicode: false),
+                        AdresseId = c.String(unicode: false),
+                        Pays = c.String(unicode: false),
+                        Ville = c.String(unicode: false),
+                        CodePostal = c.Int(nullable: false),
+                        Rue = c.String(unicode: false),
+                    })
+                .PrimaryKey(t => t.CorrespondentId);
+            
+            CreateTable(
+                "dbo.Departments",
+                c => new
+                    {
+                        DepartementId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
+                        NomDepartement = c.String(unicode: false),
+                        Responsable = c.String(unicode: false),
+                        Telephone = c.Int(nullable: false),
+                        Email = c.String(unicode: false),
+                    })
+                .PrimaryKey(t => t.DepartementId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -94,28 +125,6 @@ namespace GedPiDev.Data.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Departments",
-                c => new
-                    {
-                        DepartementId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
-                        NomDepartement = c.String(unicode: false),
-                        Responsable = c.String(unicode: false),
-                        Telephone = c.Int(nullable: false),
-                        Email = c.String(unicode: false),
-                    })
-                .PrimaryKey(t => t.DepartementId);
-            
-            CreateTable(
-                "dbo.Workflows",
-                c => new
-                    {
-                        WorkflowId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
-                    })
-                .PrimaryKey(t => t.WorkflowId)
-                .ForeignKey("dbo.Documents", t => t.WorkflowId)
-                .Index(t => t.WorkflowId);
-            
-            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
@@ -141,31 +150,12 @@ namespace GedPiDev.Data.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Correspondents",
+                "dbo.Workflows",
                 c => new
                     {
-                        CorrespondentId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
-                        NomCorrespondant = c.String(unicode: false),
-                        AdresseId = c.String(unicode: false),
-                        Telephone = c.Int(nullable: false),
-                        Email = c.String(unicode: false),
-                        Fax = c.Int(nullable: false),
+                        WorkflowId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
                     })
-                .PrimaryKey(t => t.CorrespondentId);
-            
-            CreateTable(
-                "dbo.Adresses",
-                c => new
-                    {
-                        AdresseId = c.String(nullable: false, maxLength: 80, storeType: "nvarchar"),
-                        Pays = c.String(unicode: false),
-                        Ville = c.String(unicode: false),
-                        CodePostal = c.Int(nullable: false),
-                        Rue = c.String(unicode: false),
-                    })
-                .PrimaryKey(t => t.AdresseId)
-                .ForeignKey("dbo.Correspondents", t => t.AdresseId)
-                .Index(t => t.AdresseId);
+                .PrimaryKey(t => t.WorkflowId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -195,43 +185,36 @@ namespace GedPiDev.Data.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Courriers", "CorrespondentId", "dbo.Correspondents");
-            DropForeignKey("dbo.Adresses", "AdresseId", "dbo.Correspondents");
-            DropForeignKey("dbo.Workflows", "WorkflowId", "dbo.Documents");
-            DropForeignKey("dbo.Documents", "ApplicationUserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.WorkflowDepartments", "Department_DepartementId", "dbo.Departments");
             DropForeignKey("dbo.WorkflowDepartments", "Workflow_WorkflowId", "dbo.Workflows");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "department_DepartementId", "dbo.Departments");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Courriers", "CorrespondentId", "dbo.Correspondents");
             DropForeignKey("dbo.Documents", "DocumentId", "dbo.Attachements");
             DropForeignKey("dbo.Attachements", "CourrierId", "dbo.Courriers");
             DropIndex("dbo.WorkflowDepartments", new[] { "Department_DepartementId" });
             DropIndex("dbo.WorkflowDepartments", new[] { "Workflow_WorkflowId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Adresses", new[] { "AdresseId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.Workflows", new[] { "WorkflowId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", new[] { "department_DepartementId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Documents", new[] { "ApplicationUserId" });
             DropIndex("dbo.Documents", new[] { "DocumentId" });
             DropIndex("dbo.Attachements", new[] { "CourrierId" });
             DropIndex("dbo.Courriers", new[] { "CorrespondentId" });
             DropTable("dbo.WorkflowDepartments");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Adresses");
-            DropTable("dbo.Correspondents");
+            DropTable("dbo.Workflows");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.Workflows");
-            DropTable("dbo.Departments");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Departments");
+            DropTable("dbo.Correspondents");
             DropTable("dbo.Documents");
             DropTable("dbo.Attachements");
             DropTable("dbo.Courriers");

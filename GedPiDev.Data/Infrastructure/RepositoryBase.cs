@@ -101,6 +101,11 @@ namespace GedPiDev.Data.Infrastructure
         {
             return await dbset.Where(match).ToListAsync();
         }
+
+        public T GetAll()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

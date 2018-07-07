@@ -8,7 +8,7 @@ namespace GedPiDev.Domain.Entities
 {
     public class Workflow
     {
-        [Key, ForeignKey("Document")]
+        [Key]
         public string WorkflowId { get; set; }
 
         public Workflow()
@@ -17,6 +17,5 @@ namespace GedPiDev.Domain.Entities
         }
 
         public virtual List<Department> Steps { get; set; }
-        public virtual Document Document { get; set; }
     }
 }

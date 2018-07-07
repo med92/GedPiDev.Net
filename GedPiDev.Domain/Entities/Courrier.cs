@@ -26,7 +26,7 @@ namespace GedPiDev.Domain.Entities
         //Navigation Properties
         public virtual List<Attachement> Attachements { get; set; }
         public virtual Correspondent Correspondent { get; set; }
-
+        public string sender { get; set; }
         public Courrier()
         {
             this.CourrierId = Guid.NewGuid().ToString();

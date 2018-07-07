@@ -10,7 +10,6 @@ namespace GedPiDev.Domain.Entities
 {
    public class Document
     {
-        //Id document est l'id du fichier (relation 1 to 0-1)
         [Key]
         [ForeignKey("Attachement")]  //reference a la variable de navigation
         public string DocumentId { get; set; }
@@ -19,16 +18,15 @@ namespace GedPiDev.Domain.Entities
         public int CurrentStat { get; set; }
         public string DateCreation { get; set; }
 
-        //ForeignKey
-        //User created the document
-        public string ApplicationUserId { get; set; }
+        
         //Workflow for the document
-        [ForeignKey("Workflow")]
+        
         public string WorkflowId { get; set; }
 
 
         public virtual Attachement Attachement { get; set; }
-        public virtual ApplicationUser CreationUser { get; set; }
-        public virtual Workflow Workflow { get; set; }
+        public virtual string CreationUser { get; set; }
+        public string UdateUser { get; set; }
+        public string UpdateDate { get; set; }
     }
 }

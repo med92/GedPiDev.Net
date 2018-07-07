@@ -9,16 +9,17 @@ using GedPiDev.Service.Implementation;
 
 namespace GedPiDev.RestAPI.Controllers
 {
+    [Authorize]
     public class WorkflowsController : ApiController
     {
-        private IWorkflowService workflowService = new WorkFlowService(); 
-
+        private IWorkflowService workflowService = new WorkFlowService();
+        [Authorize(Roles = "user")]
         // GET: api/Workflows
         public Task<List<Workflow>> GetWorkflows()
         {
             return workflowService.GetAllAsync();
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Workflows/5
         [ResponseType(typeof(Workflow))]
         public async Task<IHttpActionResult> GetWorkflow(string id)
@@ -31,7 +32,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return Ok(workflow);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // PUT: api/Workflows/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutWorkflow(string id, Workflow workflow)
@@ -51,7 +52,7 @@ namespace GedPiDev.RestAPI.Controllers
             
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // POST: api/Workflows
         [ResponseType(typeof(Workflow))]
         public async Task<IHttpActionResult> PostWorkflow(Workflow workflow)
@@ -66,7 +67,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = workflow.WorkflowId }, workflow);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Workflows/5
         [ResponseType(typeof(Workflow))]
         public async Task<IHttpActionResult> DeleteWorkflow(string id)
