@@ -15,16 +15,18 @@ using GedPiDev.Service.Interfaces;
 
 namespace GedPiDev.RestAPI.Controllers
 {
+    [Authorize]
     public class DocumentsController : ApiController
     {
         private IDocumentService docService = new DocumentService();
 
+        [Authorize(Roles = "user")]
         // GET: api/Documents
         public Task<List<Document>> GetDocuments()
         {
             return docService.GetAllAsync(); 
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Documents/5
         [ResponseType(typeof(Document))]
         public async Task<IHttpActionResult> GetDocument(string id)
@@ -37,7 +39,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return Ok(document);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // PUT: api/Documents/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutDocument(string id, Document document)
@@ -57,7 +59,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Documents
         [ResponseType(typeof(Document))]
         public async Task<IHttpActionResult> PostDocument(Document document)
@@ -72,7 +74,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = document.DocumentId }, document);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Documents/5
         [ResponseType(typeof(Document))]
         public async Task<IHttpActionResult> DeleteDocument(string id)

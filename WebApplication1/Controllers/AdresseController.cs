@@ -11,17 +11,18 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace WebApplication1.Controllers
-{
+{   [Authorize]
     public class AdresseController : ApiController
     {
         private IAdresseService AdresseService = new AdresseService();
 
+        [Authorize(Roles = "user")]
         // GET: api/Adresses
         public Task<List<Adresse>> GetAdresse()
         {
             return AdresseService.GetAllAsync();
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Adresses/5
         [ResponseType(typeof(Adresse))]
         public async Task<IHttpActionResult> GetAdresse(string id)
@@ -34,7 +35,7 @@ namespace WebApplication1.Controllers
 
             return Ok(Adresse);
         }
-
+        [Authorize(Roles = "canEdit,CanAdd")]
         // PUT: api/Adresses/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutAdresse(string id, Adresse Adresse)
@@ -54,7 +55,7 @@ namespace WebApplication1.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Adresses
         [ResponseType(typeof(Adresse))]
         public async Task<IHttpActionResult> PostAdresse(Adresse Adresse)
@@ -69,7 +70,7 @@ namespace WebApplication1.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = Adresse.AdresseId }, Adresse);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Adresse/5
         [ResponseType(typeof(Adresse))]
         public async Task<IHttpActionResult> DeleteAdresse(string id)

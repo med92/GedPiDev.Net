@@ -14,16 +14,17 @@ using GedPiDev.Service;
 
 namespace GedPiDev.RestAPI.Controllers
 {
+    [Authorize]
     public class DepartmentsController : ApiController
     {
-        private IDepartmentService depService = new DepartmentService(); 
-
+        private IDepartmentService depService = new DepartmentService();
+        [Authorize(Roles = "user")]
         // GET: api/Departments
         public Task<List<Department>> GetDepartments()
         {
             return depService.GetAllAsync(); 
         }
-
+        [Authorize(Roles = "user")]
         // GET: api/Departments/5
         [ResponseType(typeof(Department))]
         public async Task<IHttpActionResult> GetDepartment(string id)
@@ -36,7 +37,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return Ok(department);
         }
-
+        [Authorize(Roles = "canEdit,canAdd")]
         // PUT: api/Departments/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutDepartment(string id, Department department)
@@ -56,7 +57,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [Authorize(Roles = "canAdd,canEdit")]
         // POST: api/Departments
         [ResponseType(typeof(Department))]
         public async Task<IHttpActionResult> PostDepartment(Department department)
@@ -70,7 +71,7 @@ namespace GedPiDev.RestAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = department.DepartementId }, department);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Departments/5
         [ResponseType(typeof(Department))]
         public async Task<IHttpActionResult> DeleteDepartment(string id)
